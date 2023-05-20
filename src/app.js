@@ -6,6 +6,8 @@ const PORT = 8000;
 var http = require('http');
 var router = express.Router();
 
+var userID;
+
 
 // AWS 서버 MySQL 접속 정보
 // const connection = mysql.createConnection({
@@ -33,18 +35,26 @@ app.get("/", (req, res) => res.send("Hello! Internet Programming 2Team"));
 
 
 
-// 나중에 AWS 서버 연결 성공하면 여기서부터
-
-// 웹서버 주소  : http://127.0.01:8000
+// 나중에 AWS 서버 연결 성공하면 삭제
 http.createServer(app).listen(PORT,function(){
-  console.log('Server Running at http://127.0.01:8000 !!!!!!! ');
+  console.log('Server Running at "http://127.0.01:8000" ');
 });
 
-// 일단 개인 MySQL DB로 진행 후에 MySQL.js 코드 수정
+
 
 //router 실행
 app.use(router);
-const User = require("C:/Users/M2CL/FCFS-server/src/users/userController.js");
-app.get("/user", User.findAll);
+app.use(express.json());
+const userController = require("C:/Users/M2CL/FCFS-server/src/users/userController.js");
 
-// 여기까지 삭제하고 나머지 코드 주석 풀기
+
+// 회원가입
+app.post("/user/sign_up", userController.create);
+
+// 로그인
+app.post("/user/sign_in", userController.signin);
+
+// 탈퇴
+app.delete("/user/:userID", userController.delete);
+
+
