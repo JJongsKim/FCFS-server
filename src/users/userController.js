@@ -19,7 +19,7 @@ exports.create = (req,res)=>{
       if(err){
           res.status(500).send({
               message:
-              err.message || "DB 저장에 실패하였습니다."
+              err.message || "회원 가입에 실패하였습니다."
           });
       };
   })

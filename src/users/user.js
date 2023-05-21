@@ -1,6 +1,11 @@
 
 const sql = require("C:/Users/M2CL/FCFS-server/src/users/sql.js");
 
+// token
+const jwt = require("jsonwebtoken");
+
+
+
 const User = function(user){
     this.userID = user.userID;
     this.userName = user.userName;
@@ -21,6 +26,7 @@ User.create = (newUser, result)=>{
 
 // 로그인
 User.signin = (userID,userPassword ,result) =>{
+
     sql.query('SELECT userName FROM auth_table WHERE userID="'+ userID +'" AND userPassword ="'+ userPassword +'"', (err,res)=>{
         if(err){
             console.log("error : ",err);
@@ -33,9 +39,17 @@ User.signin = (userID,userPassword ,result) =>{
         else{
             console.log(res[0]);
             console.log("Login Successful !! Welcome ~~ ")
+
+            //1시간 동안 유효한 토큰 발급
+            const token = jwt.sign({ userID: userID } , process.env.KEY, {  expiresIn: "1h",});
+            console.log(token);
+    
             return result(null, res);
         }
     });
+
+
+
 };
 
 

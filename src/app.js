@@ -1,4 +1,6 @@
+//.env값 읽는 모듈
 require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
@@ -6,7 +8,6 @@ const PORT = 8000;
 var http = require('http');
 var router = express.Router();
 
-var userID;
 
 
 // AWS 서버 MySQL 접속 정보
