@@ -1,4 +1,4 @@
-const postsModel = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/board/boardmodel.js");
+const boardModel = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/board/boardmodel.js");
 const MarkdownIt = require("markdown-it")({
   html: true,
   linkify: true,
@@ -7,7 +7,7 @@ const MarkdownIt = require("markdown-it")({
 
 //리스트
 exports.getList = (req, res) => {
-  postsModel.getList((result) => {
+  boardModel.getList((result) => {
     if (result) {
       //console.log(result);
 
@@ -38,7 +38,7 @@ exports.insertProcess = (req, res) => {
     password: req.body.password,
   };
 
-  postsModel.insertData(item, (result) => {
+  boardModel.insertData(item, (result) => {
     if (result) {
       if (result.affectedRows === 1) {
         res.redirect("/board");
@@ -53,7 +53,7 @@ exports.insertProcess = (req, res) => {
 exports.getView = (req, res) => {
   let id = req.params.id;
 
-  postsModel.getView(id, (result) => {
+  boardModel.getView(id, (result) => {
     if (result) {
       result.content = MarkdownIt.render(result.content);
 
@@ -69,7 +69,7 @@ exports.getView = (req, res) => {
 exports.getEditForm = (req, res) => {
   let id = req.params.id;
 
-  postsModel.getEdit(id, (result) => {
+  boardModel.getEdit(id, (result) => {
     if (result) {
       //console.log(result);
 
@@ -118,7 +118,7 @@ exports.deleteProcess = (req, res) => {
     password: req.body.password,
   };
 
-  postsModel.deleteData(item, (result) => {
+  boardModel.deleteData(item, (result) => {
     if (result) {
       if (result.affectedROws === 1) {
         res.redirect("/board/");
