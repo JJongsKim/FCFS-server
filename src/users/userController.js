@@ -6,20 +6,21 @@ const jwt = require("jsonwebtoken");
 // 회원가입
 exports.create = (req,res)=>{
   const result = req.body;
-  const pwdCheck = result.pwdCheck;
-  const userid = ((result.userPassword==pwdCheck) ? result.userId : null );
+  const pwdcheck = result.pwdCheck;
+  const userid = ((result.userPassword==pwdcheck) ? result.userId : null );
 
+  console.log(userid);
   //json으로 가져온 값 user객체에 넣기   
   const user = new User({
-    userID: userid,
+    userId: userid,
     userName: result.userName,
     userPassword:  result.userPassword
   })
   
   User.create(user ,(err, data) =>{
         if(err){
-            res.status(500).json({ message: "회원 가입에 실패하였습니다."});
-        }
+            return res.status(500).json({ message: "회원 가입 실패"});
+        } return res.status(200).json({ message: "회원 가입 성공"});
     })
 
   
