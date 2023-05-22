@@ -5,11 +5,13 @@ const app = express();
 const mysql = require("mysql");
 const PORT = 8000;
 const path=require('path');
-app.set('view engine');
-app.set('views',path.join(__dirname,'views'));
+app.set('view engine','html');
+app.set('views',path.join(__dirname,'board'));
 var http = require("http");
 var router = express.Router();
 
+
+app.engine('html', require('ejs').renderFile);
 
 
 // const connection = mysql.createConnection({

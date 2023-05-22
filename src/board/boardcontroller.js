@@ -11,7 +11,7 @@ exports.getList = (req, res) => {
     if (result) {
       //console.log(result);
 
-      res.render("board/list", {
+      res.json({
         title: "선착순",
         posts: result,
       });
@@ -23,7 +23,7 @@ exports.getList = (req, res) => {
 
 //글 작성-폼
 exports.getboardFrom = (req, res) => {
-  res.render("/board/writeFrom", {
+  res.json( {
     title: "업로드하기",
   });
 };
@@ -55,9 +55,9 @@ exports.getView = (req, res) => {
 
   boardModel.getView(id, (result) => {
     if (result) {
-      result.content = MarkdownIt.render(result.content);
+      result.content = MarkdownIt.json();
 
-      res.render("board/view", {
+      res.json( {
         title: result.subject,
         post: result,
       });
@@ -73,7 +73,7 @@ exports.getEditForm = (req, res) => {
     if (result) {
       //console.log(result);
 
-      res.render("board/writeForm", {
+      res.json( {
         title: result.subject,
         mode: "edit",
         post: result,
