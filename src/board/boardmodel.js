@@ -1,6 +1,7 @@
 //mysql연결
-const mysqlConnObj = require('C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/mysql.js');
-const mysqlConn = mysqlConnObj.connect();
+//const mysqlConnObj = require('C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/mysql.js');
+//const mysqlConn = mysqlConnObj.connect();
+const mysqlConn = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/mysql.js");
 
 const bcrypt = require("bcrypt");
 const saltRound = 10;
