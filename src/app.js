@@ -50,7 +50,7 @@ const userController = require("C:/Users/M2CL/FCFS-server/src/users/userControll
 
 
 // 회원가입
-app.post("/user/sign_up", userController.create);
+app.post("/user/sign_up",  userController.create);
 
 // 로그인
 app.post("/user/sign_in", userController.signin);
