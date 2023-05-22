@@ -65,7 +65,6 @@ exports.getView = (req, res) => {
   });
 };
 
-//...whatever... ..?
 //글 수정-폼
 exports.getEditForm = (req, res) => {
   let id = req.params.id;

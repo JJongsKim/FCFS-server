@@ -4,6 +4,9 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const PORT = 8000;
+const path=require('path');
+app.set('view engine');
+app.set('views',path.join(__dirname,'views'));
 var http = require("http");
 var router = express.Router();
 
@@ -46,5 +49,6 @@ app.use(router);
 
 const mysql_test = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/mysql.js");
 
-const boardController = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/board/boardcontroller.js")
+const boardController = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/board/boardcontroller.js");
+const { appendFileSync } = require("fs");
 router.get("/",boardController.getList)
