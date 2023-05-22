@@ -51,9 +51,9 @@ exports.insertProcess = (req, res) => {
 
 //글읽기
 exports.getView = (req, res) => {
-  let id = req.params.id;
+  let title = req.params.title;
 
-  boardModel.getView(id, (result) => {
+  boardModel.getView(title, (result) => {
     if (result) {
       result.content = MarkdownIt.json();
 
@@ -67,9 +67,9 @@ exports.getView = (req, res) => {
 
 //글 수정-폼
 exports.getEditForm = (req, res) => {
-  let id = req.params.id;
+  let title = req.params.title;
 
-  boardModel.getEdit(id, (result) => {
+  boardModel.getEdit(title, (result) => {
     if (result) {
       //console.log(result);
 
