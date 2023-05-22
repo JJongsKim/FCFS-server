@@ -12,10 +12,10 @@ router.get("/new", boardController.getPostFrom);
 router.post("/new", boardControllwr.insertProcess);
 
 //View Post
-router.get("/:id", boardController.getView);
+router.get("/:title", boardController.getView);
 
 //Edit Post From -글쓰기 폼을 공유해서 사용
-router.get("/:id/edit", boardController.getEditFrom);
+router.get("/:title/edit", boardController.getEditFrom);
 
 //Edit Post Process
 router.put("/:id", boardController.updateProcess);
