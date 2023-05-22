@@ -1,25 +1,50 @@
 require("dotenv").config();
+require;
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const PORT = 8000;
+var http = require("http");
+var router = express.Router();
 
-const connection = mysql.createConnection({
-  host: process.env.RDS_HOST,
-  user: process.env.RDS_USER,
-  password: process.env.RDS_PASSWORD,
+
+
+// const connection = mysql.createConnection({
+//   host: "127.0.0.1",
+//   user: "test_user",
+//   password: process.env.RDS_PASSWORD,
+//   database: "db_test",
+//   port: process.env.DB_PORT,
+// });
+
+// connection.connect(function (err) {
+//   if (err) {
+//     console.error("Database connection failed: " + err.stack);
+//     return;
+//   }
+//whatever;
+//const methodOverride = require("method-override");
+//whatever;
+//app.use(methodOverride("_method"));
+//whatever;
+//   console.log("Connected to database.");
+// });
+
+// connection.end();
+
+// app.get("/", (req, res) => res.send("Hello! Internet Programming 2Team"));
+// app.listen(PORT, () => console.log("Test app listening on port 8000!"));
+
+http.createServer(app).listen(PORT, function () {
+  console.log("Server Running at http://127.0.01:8000 !!!!!!! ");
 });
 
-connection.connect(function (err) {
-  if (err) {
-    console.error("Database connection failed: " + err.stack);
-    return;
-  }
+app.use(router);
+//const User = require("/Users/yuyongbin/Desktop/FCFS-server/src/users/userController.js");
+//const { version } = require("punycode");
+//app.get("/user", User.findAll);
 
-  console.log("Connected to database.");
-});
+const mysql_test = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/mysql.js");
 
-connection.end();
-
-app.get("/", (req, res) => res.send("Hello! Internet Programming 2Team"));
-app.listen(PORT, () => console.log("Test app listening on port 8000!"));
+const boardController = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/board/boardcontroller.js")
+router.get("/",boardController.getList)

@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/JJongsKim/FCFS-server#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "markdown-it": "^13.0.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.22"
   }
