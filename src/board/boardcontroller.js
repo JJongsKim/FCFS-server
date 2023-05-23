@@ -27,23 +27,12 @@ exports.insert = (req,res)=>{
   };
   
   // 게시글 조회  흠.......?
-exports.get = (req,res)=>{
-    const result = req.body;
-  
-    //json으로 가져온 값 user객체에 넣기   
-    const  board = new Board({
-      Category: result.Category,
-      HeadCount: result.HeadCount,
-      Title: result.Title,
-      Content: result.Content,
-      Nickname: result.Nickname
-    });
-    
-    Board.get( board,(err, data) =>{
-          if(err){
-              return res.status(500).json({ message: " 실 패 "});
-          } return res.status(200).json({ message: " 성 공"});
-      })
+exports.getAll = (req,res)=>{
+    Board.getAll((err, data) =>{
+          if(err)
+              res.status(500).json({ message: " 조회 실패 "});
+              else res.send(data);
+      });
   };
 
   //게시글 수정
