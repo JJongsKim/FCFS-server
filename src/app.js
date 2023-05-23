@@ -32,5 +32,5 @@ const boardController = require("C:/branch/FCFS-server/src/board/boardcontroller
 
 app.post("/new", boardController.insert);
 app.get("/title",boardController.getAll);
-app.put("/:ID",boardController.update);
+app.put("/content",boardController.update);
 app.delete("/:ID",boardController.delete);

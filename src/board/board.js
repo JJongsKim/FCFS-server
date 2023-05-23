@@ -51,9 +51,9 @@ Board.getAll = result =>{
 };
 
 // // 글수정(put)
-Board.update = (id,board, result)=>{
-    sql.query("Update board  SET Category = '?', Title = '?' , Content = '?' WHERE id = ?",
-   [board.Category,board.Title,board.Content,id], 
+Board.update = (ID,board, result)=>{
+    sql.query("Update board  SET Category = '?', Title = '?' , Content = '?' WHERE ID = ?",
+   [board.Category,board.Title,board.Content,ID], 
     (err, res)=>{ 
         if(err){
            console.log("error : ", err);

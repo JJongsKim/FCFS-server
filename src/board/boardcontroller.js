@@ -45,17 +45,17 @@ exports.getAll = (req,res)=>{
       console.log(req.body);
 
       board.update(
-        req.params.id,
+        req.params.ID,
         new board(req.body),
         (err,data) =>{
           if(err) {
             if (err.kind == "not_found"){
               res.status(404).send({
-                message:'게시글을 찾을 수 없습니다 .id'+ req.params.id
+                message:'게시글을 찾을 수 없습니다 .ID'+ req.params.ID
               });
             }else{
               res.status(500).send({
-                message:"업데이트가 완료되었습니다" + req.params.id
+                message:"업데이트가 완료되었습니다" + req.params.ID
               });
             }
           }else res.send(data);
