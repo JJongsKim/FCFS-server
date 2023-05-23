@@ -61,7 +61,7 @@ Board.get = (newPost, result)=>{
 
 // 글삭제(delete)
 Board.remove = (ID, result)=>{
-    sql.query('DELETE FROM board WHERE ', ID, (err, res)=>{ 
+    sql.query('DELETE FROM board' , ID, (err, res)=>{ 
         if(err){
                 console.log("error : ", err);
                 result(err, null);
