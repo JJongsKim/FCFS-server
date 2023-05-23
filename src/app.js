@@ -10,7 +10,6 @@ app.set('views',path.join(__dirname,'board'));
 var http = require("http");
 var router = express.Router();
 
-
 app.engine('html', require('ejs').renderFile);
 
 
@@ -54,3 +53,12 @@ const mysql_test = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/mysq
 const boardController = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/board/boardcontroller.js");
 const { appendFileSync } = require("fs");
 router.get("/",boardController.getList)
+
+//app.use('/', router)
+//app.all('*', function(req, res){
+// res.status(404).send('<h1>ERROR - 페이지를 찾을 수 없습니다.</h1>');
+//})
+//app.listen(app.get('port'), function(){
+//console.log('서버가 시작되었습니다. 포트 : '+app.get('port'));
+//connectDB();
+//});
