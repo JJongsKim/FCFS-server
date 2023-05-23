@@ -1,7 +1,7 @@
 // const express = require("express");
 // const router = express.Router();
 // const boardController = require("/Users/ADMIN/Desktop/GitHub/FCFS-server/src/board/boardcontroller.js");
-const sql = require("C:/branch/FCFS-server/src/board/sql.js");
+const sql = require("C:/Users/ADMIN/Documents/GitHub/FCFS-server/src/board/sql.js");
 
 
 /*
@@ -26,7 +26,7 @@ const Board = function(board){
 
 
 
-// 회원가입 
+// 글작성
 Board.insertProcess = (newPost, result)=>{
     sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
                 console.log("error : ", err);
