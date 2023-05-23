@@ -26,7 +26,7 @@ exports.insert = (req,res)=>{
       })
   };
   
-  // 게시글 조회
+  // 게시글 조회  흠.......?
 exports.get = (req,res)=>{
     const result = req.body;
   
@@ -47,6 +47,9 @@ exports.get = (req,res)=>{
   };
 
   //게시글 수정
+  exports.update = (req,res)=>{
+    Board.put(req.params.ID,(err,data)=>{}
+    )}
 
   //게시글 삭제
   exports.delete = (req,res)=>{

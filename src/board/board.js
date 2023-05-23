@@ -49,19 +49,19 @@ Board.get = (newPost, result)=>{
 };
 
 // 글수정(put)
-// Board.insert = (newPost, result)=>{
-//     sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
-//                 console.log("error : ", err);
-//                 return result(err, null);
-//             }
-//             console.log("Created user : ",{...newPost });
-//             return result(null, {...newPost});
-//         });
-// };
+Board.update = (newPost, result)=>{
+    sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
+                console.log("error : ", err);
+                return result(err, null);
+            }
+            console.log("Created user : ",{...newPost });
+            return result(null, {...newPost});
+        });
+};
 
-// 글삭제(delete)
+// 글삭제(delete)--전체 삭제는 되는데 왜 where ID = ?하면 안될까?
 Board.remove = (ID, result)=>{
-    sql.query('DELETE FROM board' , ID, (err, res)=>{ 
+    sql.query('DELETE FROM board WHERE ID = ? ' , ID, (err, res)=>{ 
         if(err){
                 console.log("error : ", err);
                 result(err, null);
