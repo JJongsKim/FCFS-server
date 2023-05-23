@@ -27,7 +27,7 @@ const Board = function(board){
 
 
 // 글작성
-Board.insertProcess = (newPost, result)=>{
+Board.insert = (newPost, result)=>{
     sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
                 console.log("error : ", err);
                 return result(err, null);
@@ -37,4 +37,36 @@ Board.insertProcess = (newPost, result)=>{
         });
 };
 
+//글조회(get)
+Board.get = (newPost, result)=>{
+    sql.query("Select * from board",  (err, res)=>{ if(err){
+                console.log("error : ", err);
+                return result(err, null);
+            }
+            console.log("Get newPost : ",{...newPost });
+            return result(null, {...newPost});
+        });
+};
+
+// 글수정(put)
+// Board.insert = (newPost, result)=>{
+//     sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
+//                 console.log("error : ", err);
+//                 return result(err, null);
+//             }
+//             console.log("Created user : ",{...newPost });
+//             return result(null, {...newPost});
+//         });
+// };
+
+// 글삭제(delete)
+// Board.insert = (newPost, result)=>{
+//     sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
+//                 console.log("error : ", err);
+//                 return result(err, null);
+//             }
+//             console.log("Created user : ",{...newPost });
+//             return result(null, {...newPost});
+//         });
+// };
 module.exports= Board;
