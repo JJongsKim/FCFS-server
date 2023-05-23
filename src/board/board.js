@@ -27,7 +27,7 @@ const Board = function(board){
 
 
 // 글작성
-Board.insertProcess = (newPost, result)=>{
+Board.insert = (newPost, result)=>{
     sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
                 console.log("error : ", err);
                 return result(err, null);
@@ -61,7 +61,7 @@ Board.get = (newPost, result)=>{
 
 // 글삭제(delete)
 Board.remove = (ID, result)=>{
-    sql.query('DELETE FROM board', ID, (err, res)=>{ 
+    sql.query('DELETE FROM board WHERE ', ID, (err, res)=>{ 
         if(err){
                 console.log("error : ", err);
                 result(err, null);
