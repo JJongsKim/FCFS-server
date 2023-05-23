@@ -22,9 +22,9 @@ exports.getList = (req, res) => {
 };
 
 //글 작성-폼
-exports.getboardFrom = (req, res) => {
+exports.getboardForm = (req, res) => {
   res.json( {
-    title: "업로드하기",
+    'title': "업로드하기",
   });
 };
 
@@ -41,9 +41,9 @@ exports.insertProcess = (req, res) => {
   boardModel.insertData(item, (result) => {
     if (result) {
       if (result.affectedRows === 1) {
-        res.redirect("/board");
+        res.redirect('/board');
       } else {
-        res.redirect("/board/new");
+        res.redirect('/board/new');
       }
     }
   });
