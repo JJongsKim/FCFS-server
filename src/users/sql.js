@@ -11,6 +11,7 @@ var connection = mysql.createConnection({
   host: process.env.RDS_HOST,
   user: process.env.RDS_USER,
   password: process.env.RDS_PASSWORD,
+  database: "mju_database",
 });
 
 connection.connect((error) => {
