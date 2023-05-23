@@ -45,3 +45,29 @@ exports.get = (req,res)=>{
           } return res.status(200).json({ message: " 성 공"});
       })
   };
+
+  //게시글 수정
+
+  //게시글 삭제
+  exports.delete = (req,res)=>{
+    Board.remove(req.params.ID,(err,data)=>{
+    
+      //삭제 실패
+      if(err){
+        //게시글이 없는 경우
+        if(err.kind == "not_found"){
+          res.status(404).send({
+            message:'없는 게시글입니다.ID:'+req.params.ID
+          });
+        }
+      //서버 오류
+      else{
+        res.status(500).send({
+         message:"error!! ID :" + req.params.ID
+  });
+}
+      }
+      //삭제 성공
+      else res.send({message:'게시글 삭제'});
+    });
+      };

@@ -27,7 +27,7 @@ const Board = function(board){
 
 
 // 글작성
-Board.insert = (newPost, result)=>{
+Board.insertProcess = (newPost, result)=>{
     sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
                 console.log("error : ", err);
                 return result(err, null);
@@ -60,13 +60,20 @@ Board.get = (newPost, result)=>{
 // };
 
 // 글삭제(delete)
-// Board.insert = (newPost, result)=>{
-//     sql.query("INSERT INTO board SET ?", newPost, (err, res)=>{ if(err){
-//                 console.log("error : ", err);
-//                 return result(err, null);
-//             }
-//             console.log("Created user : ",{...newPost });
-//             return result(null, {...newPost});
-//         });
-// };
+Board.remove = (ID, result)=>{
+    sql.query('DELETE FROM board', ID, (err, res)=>{ 
+        if(err){
+                console.log("error : ", err);
+                result(err, null);
+                return;
+            }
+            //없는ID인경우
+            if(res.affectedRows == 0){ 
+                result({kind:"not_found"},null);
+            return; 
+            }
+            result(null,res);
+        });
+};
+
 module.exports= Board;
