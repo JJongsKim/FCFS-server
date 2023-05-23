@@ -26,7 +26,7 @@ exports.insert = (req,res)=>{
       })
   };
   
-  // 게시글 조회  흠.......?
+  // 게시글 조회
 exports.getAll = (req,res)=>{
     Board.getAll((err, data) =>{
           if(err)
@@ -37,8 +37,32 @@ exports.getAll = (req,res)=>{
 
   //게시글 수정
   exports.update = (req,res)=>{
-    Board.put(req.params.ID,(err,data)=>{}
-    )}
+    if (!req.body){
+      res.status(400).send({
+        message:"내용이 비어있으면 안됩니다!"
+      });
+
+      console.log(req.body);
+
+      board.update(
+        req.params.id,
+        new board(req.body),
+        (err,data) =>{
+          if(err) {
+            if (err.kind == "not_found"){
+              res.status(404).send({
+                message:'게시글을 찾을 수 없습니다 .id'+ req.params.id
+              });
+            }else{
+              res.status(500).send({
+                message:"업데이트가 완료되었습니다" + req.params.id
+              });
+            }
+          }else res.send(data);
+        }
+      );
+    };
+  };
 
   //게시글 삭제
   exports.delete = (req,res)=>{
@@ -56,10 +80,10 @@ exports.getAll = (req,res)=>{
       else{
         res.status(500).send({
          message:"error!! ID :" + req.params.ID
-  });
-}
+          });
+        }
       }
       //삭제 성공
       else res.send({message:'게시글 삭제'});
     });
-      };
+  };
