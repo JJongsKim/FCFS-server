@@ -41,15 +41,16 @@ exports.getAll = (req,res)=>{
       res.status(400).send({
         message:"내용이 비어있으면 안됩니다!"
       });
+    }
 
       console.log(req.body);
 
-      board.update(
+      Board.update(
         req.params.ID,
         new board(req.body),
         (err,data) =>{
           if(err) {
-            if (err.kind == "not_found"){
+            if (err.kind === "not_found"){
               res.status(404).send({
                 message:'게시글을 찾을 수 없습니다 .ID'+ req.params.ID
               });
@@ -62,7 +63,6 @@ exports.getAll = (req,res)=>{
         }
       );
     };
-  };
 
   //게시글 삭제
   exports.delete = (req,res)=>{
