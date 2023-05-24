@@ -133,8 +133,8 @@ Board.updateCount = (CurrentCount, boardId, result) => {
 };
 
 // 글삭제(delete)
-Board.remove = (boarId, result) => {
-  sql.query("DELETE FROM board WHERE boarId = ? ", boarId, (err, res) => {
+Board.remove = (boardId, result) => {
+  sql.query("DELETE FROM board WHERE boarId = ? ", boardId, (err, res) => {
     if (err) {
       console.log("error : ", err);
       result(err, null);
