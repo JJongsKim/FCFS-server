@@ -6,21 +6,21 @@ exports.insert = (req, res) => {
 
   //json으로 가져온 값 user객체에 넣기
   const board = new Board({
-    boardId: result.boardId,
+    // boardId: result.boardId,
     Category: result.Category,
     HeadCount: result.HeadCount,
     Title: result.Title,
     Content: result.Content,
     userId: result.userId,
     CurrentCount: result.CurrentCount,
-    post_date: result.post_date,
+    // post_date: result.post_date,
   });
 
   Board.insert(board, (err, data) => {
     if (err) {
-      return res.status(500).json({ message: " 실 패 " });
+      return res.status(500).json({ message: "실 패" });
     }
-    return res.status(200).json({ message: " 성 공" });
+    return res.status(200).json({ message: "성 공" });
   });
 };
 
