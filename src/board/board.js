@@ -21,11 +21,11 @@ const Board = function (board) {
     (this.CurrentCount = board.CurrentCount);
 };
 
-//게시글 목록 조회(get)
-//카테고리, 제목, 내용, 현재인원, 모집인원
+// 게시글 목록 조회(get)
+// 카테고리, 제목, 내용, 현재인원, 모집인원, 게시글 순서(id), 유저확인(userId
 Board.getAll = (result) => {
   sql.query(
-    "SELECT Category, Title, Content, CurrentCount, HeadCount from board",
+    "SELECT Category, Title, Content, CurrentCount, HeadCount, boardId, userId from board",
     (err, res) => {
       if (err) {
         console.log("error : ", err);
