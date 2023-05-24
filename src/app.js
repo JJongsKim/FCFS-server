@@ -2,6 +2,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const PORT = 8000;
 var http = require("http");
@@ -18,6 +19,7 @@ http.createServer(app).listen(PORT, function () {
   console.log('Server Running at "http://127.0.01:8000" ');
 });
 
+app.user(cors());
 //router 실행
 app.use(router);
 app.use(express.json());
