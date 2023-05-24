@@ -60,7 +60,7 @@ Board.getDetail = (boardId, result) => {
 // 게시글 작성
 Board.insert = (newPost, result) => {
   sql.query(
-    "INSERT INTO board (Category,HeadCount,Title,Content,userId,CurrentCount) VALUES ( ?, ?, ?, ? ,?,?);",
+    "INSERT INTO board (Category, HeadCount, Title, Content, userId, CurrentCount) VALUES (?, ?, ?, ? ,?, ?);",
     [
       newPost.Category,
       newPost.HeadCount,
