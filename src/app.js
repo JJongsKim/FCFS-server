@@ -19,7 +19,7 @@ http.createServer(app).listen(PORT, function () {
   console.log('Server Running at "http://127.0.01:8000" ');
 });
 
-app.user(cors());
+app.use(cors());
 //router 실행
 app.use(router);
 app.use(express.json());
