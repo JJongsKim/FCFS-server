@@ -1,4 +1,4 @@
-const sql = require("./sql");
+const sql = require("../sql");
 
 const User = function (user) {
   this.userId = user.userId;

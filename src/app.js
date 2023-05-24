@@ -1,29 +1,28 @@
-//.env값 읽는 모듈
+// .env값 읽는 모듈
 require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
 const app = express();
 const PORT = 8000;
+
+const userController = require("./users/userController");
+const boardController = require("./board/boardController");
+
 var http = require("http");
 var router = express.Router();
-
-// AWS 서버 실행
-// app.listen(PORT, () => console.log("Test app listening on port 8000!"));
 
 // 웹 페이지 출력
 app.get("/", (req, res) => res.send("Hello! Internet Programming 2Team"));
 
-// 나중에 AWS 서버 연결 성공하면 삭제
 http.createServer(app).listen(PORT, function () {
-  console.log('Server Running at "http://127.0.01:8000" ');
+  console.log("Server Running at EC2 Server!!!");
 });
 
+//router 실행, cors 전체허용
 app.use(cors());
-//router 실행
 app.use(router);
 app.use(express.json());
-const userController = require("./users/userController");
 
 // 회원가입
 app.post("/user/sign_up", userController.create);
@@ -33,3 +32,21 @@ app.post("/user/sign_in", userController.signin);
 
 // 탈퇴
 app.delete("/user/:userID", userController.delete);
+
+// 게시글 한개 조회(get)
+app.get("/title/detail", boardController.getDetail);
+
+//게시글 목록 조회(get)
+app.get("/title", boardController.getAll);
+
+// 게시글 작성(post)
+app.post("/new", boardController.insert);
+
+//게시글 수정(put)
+app.put("/:boardId", boardController.update);
+
+//인원수 추가
+app.put("/count/:boardId", boardController.updateCount);
+
+// 게시글 삭제
+app.delete("/:boardId", boardController.delete);
