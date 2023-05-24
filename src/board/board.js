@@ -51,10 +51,10 @@ Board.getAll = result =>{
 };
 
 // // 글수정(put)
-Board.update = (ID, Board, result)=>{
+Board.updateById = (id, Board, result)=>{
     sql.query(
-        "Update board  SET Category = '?',HeadCount = '?', Title = '?' , Content = '?',Nickname = '?' WHERE ID = ?",
-   [board.Category,board.HeadCount,board.Title,board.Content,board.Nickname,ID], 
+        "Update board  SET Category = ?,HeadCount = ?, Title = ? , Content = ?,Nickname = ? WHERE id = ?",
+   [Board.Category,Board.HeadCount,Board.Title,Board.Content,Board.Nickname,id], 
     (err, res)=>{ 
         if(err){
            console.log("error : ", err);
@@ -66,8 +66,8 @@ Board.update = (ID, Board, result)=>{
              return;
             }
 
-            console.log("updated board: ",{ board });
-            result(null, {...newPost});
+            console.log("updated board: ",{id:id, ...Board });
+            result(null, {id:id, ...Board});
     }
     );
     };

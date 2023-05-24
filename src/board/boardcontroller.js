@@ -45,14 +45,14 @@ exports.getAll = (req,res)=>{
 
       console.log(req.body);
 
-      Board.update(
+      Board.updateById(
         req.params.ID,
-        new board(req.body),
+        new Board(req.body),
         (err,data) =>{
           if(err) {
             if (err.kind === "not_found"){
               res.status(404).send({
-                message:'게시글을 찾을 수 없습니다 .ID'+ req.params.ID
+                message:'게시글을 찾을 수 없습니다 .ID${req.params.customerId}. '
               });
             }else{
               res.status(500).send({
@@ -63,6 +63,47 @@ exports.getAll = (req,res)=>{
         }
       );
     };
+  // exports.update = (req,res)=>{
+
+  //   const result = req.body
+    
+  //     const  board = new Board({
+  //         Category: result.Category,
+  //         HeadCount: result.HeadCount,
+  //         Title: result.Title,
+  //         Content: result.Content,
+  //         Nickname: result.Nickname
+  //       });
+    
+    
+    
+  //       if (!req.body){
+    
+  //         res.status(400).send({
+  //           message:"내용이 비어있으면 안됩니다!"
+  //         });
+  //       }
+    
+  //         console.log(req.body);
+    
+  //         Board.update(
+  //           req.params.ID,
+  //           board,
+  //           (err,data) =>{
+  //             if(err) {
+  //               if (err.kind === "not_found"){
+  //                 res.status(404).send({
+  //                   message:'게시글을 찾을 수 없습니다 .ID'+ req.params.ID
+  //                 });
+  //               }else{
+  //                 res.status(500).send({
+  //                   message:"업데이트가 완료되었습니다" + req.params.ID
+  //                 });
+  //               }
+  //             }else res.send(data);
+  //           }
+  //         );
+  //       };
 
   //게시글 삭제
   exports.delete = (req,res)=>{
