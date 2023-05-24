@@ -2,11 +2,6 @@ const User = require("./user");
 
 // token
 const jwt = require("jsonwebtoken");
-const crpyto = require("crypto");
-
-const privateKey = crpyto.generateKeyPairSync("rsa", {
-  modulusLength: 2048,
-}).privateKey;
 
 // 회원가입
 exports.create = (req, res) => {
@@ -59,11 +54,7 @@ exports.signin = (req, res) => {
     // 로그인 성공
     else {
       //1시간 동안 유효한 토큰 발급
-      // const token = jwt.sign({ userId: user.userId }, process.env.KEY, {
-      //   expiresIn: "1h",
-      // });
-      const token = jwt.sign({ userId: user.userId }, privateKey, {
-        algorithm: "RS256",
+      const token = jwt.sign({ userId: user.userId }, process.env.KEY, {
         expiresIn: "1h",
       });
       res.send({ message: "로그인 성공", AccessToken: token });
