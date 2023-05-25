@@ -58,7 +58,7 @@ exports.updateCount = (req, res) => {
           message: "게시글을 찾을 수 없습니다 .boardId${req.params.boardId}. ",
         });
       } else {
-        res.status(500).send({
+        res.status(200).send({
           message: "업데이트가 완료되었습니다" + req.params.boardId,
         });
       }
