@@ -55,7 +55,7 @@ exports.updateCount = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: "게시글을 찾을 수 없습니다 .boardId${req.params.boardId}. ",
+          message: "게시글을 찾을 수 없습니다" + req.params.boardId,
         });
       } else {
         res.status(200).send({
