@@ -57,7 +57,11 @@ exports.signin = (req, res) => {
       const token = jwt.sign({ userId: user.userId }, process.env.KEY, {
         expiresIn: "1h",
       });
-      res.send({ message: "로그인 성공", AccessToken: token });
+      res.send({
+        message: "로그인 성공",
+        AccessToken: token,
+        userId: user.userId,
+      });
     }
   });
 };
