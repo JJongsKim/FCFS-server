@@ -113,7 +113,7 @@ Board.updateById = (boardId, Board, result) => {
 Board.updateCount = (CurrentCount, boardId, result) => {
   sql.query(
     "Update board SET CurrentCount = ? WHERE boardId = ?",
-    [CurrentCount, boardId],
+    [CurrentCount + 1, boardId],
     (err, res) => {
       if (err) {
         console.log("error : ", err);
