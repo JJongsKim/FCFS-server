@@ -113,7 +113,7 @@ Board.updateById = (boardId, Board, result) => {
 //인원수 추가
 Board.updateCount = (CurrentCount, CountUser, boardId, result) => {
   sql.query(
-    "UPDATE board SET CurrentCount = ?, CountUser = CONCAT(CountUser, ', ', ?) WHERE boardId = ?",
+    "UPDATE board SET CurrentCount = ?, CountUser = CONCAT(CountUser, ?, ',') WHERE boardId = ?",
     [CurrentCount + 1, CountUser, boardId],
     (err, res) => {
       if (err) {
