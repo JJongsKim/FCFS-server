@@ -112,25 +112,6 @@ Board.updateById = (boardId, Board, result) => {
 
 //인원수 추가
 Board.updateCount = (CurrentCount, CountUser, boardId, result) => {
-  // sql.query(
-  //   "Update board SET CurrentCount = ? WHERE boardId = ?",
-  //   [CurrentCount + 1, CountUser, boardId],
-  //   (err, res) => {
-  //     if (err) {
-  //       console.log("error : ", err);
-  //       result(null, err);
-  //       return;
-  //     }
-
-  //     if (res.affectedRows == 0) {
-  //       result({ kind: "not_found" }, null);
-  //       return;
-  //     }
-
-  //     console.log("updated board: ", { boardId: boardId, ...Board });
-  //     result(null, { boardId: boardId, ...Board });
-  //   }
-  // );
   sql.query(
     "SELECT CountUser FROM board WHERE boardId = ?",
     [boardId],

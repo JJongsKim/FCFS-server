@@ -49,6 +49,7 @@ exports.update = (req, res) => {
 exports.updateCount = (req, res) => {
   const CurrentCount = req.body.CurrentCount;
   const CountUser = req.body.CountUser;
+  console.log(req.body);
 
   Board.updateCount(
     CurrentCount,
