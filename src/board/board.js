@@ -110,25 +110,37 @@ Board.updateById = (boardId, Board, result) => {
   );
 };
 
-//인원수 추가
+// 인원수 추가 쿼리
 Board.updateCount = (CurrentCount, CountUser, boardId, result) => {
   sql.query(
-    "UPDATE board SET CurrentCount = ?, CountUser = CONCAT(CountUser, ?, ',') WHERE boardId = ?",
-    [CurrentCount + 1, CountUser, boardId],
+    "UPDATE board SET CurrentCount = ?, CountUser = IFNULL(CountUser, JSON_ARRAY()) WHERE boardId = ?",
+    [CurrentCount + 1, boardId],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        console.log("에러 발생: ", err);
         result(err, null);
         return;
       }
       if (res.affectedRows === 0) {
-        console.log("Board not found");
+        console.log("게시판을 찾을 수 없습니다.");
         result({ kind: "not_found" }, null);
         return;
       }
 
-      console.log("Updated CountUser for boardId: ", boardId);
-      result(null, { boardId: boardId });
+      sql.query(
+        "UPDATE board SET CountUser = JSON_ARRAY_APPEND(CountUser, '$', ?) WHERE boardId = ?",
+        [CountUser, boardId],
+        (err, res) => {
+          if (err) {
+            console.log("에러 발생: ", err);
+            result(err, null);
+            return;
+          }
+
+          console.log("boardId에 대한 CountUser 업데이트 완료: ", boardId);
+          result(null, { boardId: boardId });
+        }
+      );
     }
   );
 };
