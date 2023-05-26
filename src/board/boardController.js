@@ -48,8 +48,7 @@ exports.update = (req, res) => {
 //인원수 체크
 exports.updateCount = (req, res) => {
   const CurrentCount = req.body.CurrentCount;
-  const CountUser = req.body.CountUser;
-  console.log(req.body);
+  const CountUser = req.body.user;
 
   Board.updateCount(
     CurrentCount,
