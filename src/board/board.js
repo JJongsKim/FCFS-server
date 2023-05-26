@@ -131,15 +131,15 @@ Board.updateCount = (CurrentCount, CountUser, boardId, result) => {
       let updatedCountUser;
 
       if (!countUser) {
-        updatedCountUser = [countUser];
+        updatedCountUser = [CountUser];
       } else {
         const countUserArray = countUser.split(",");
-        if (countUserArray.includes(userId)) {
+        if (countUserArray.includes(CountUser)) {
           console.log("User already exists in CountUser");
           result(null, { boardId: boardId });
           return;
         }
-        updatedCountUser = [...countUserArray, userId];
+        updatedCountUser = [...countUserArray, CountUser];
       }
 
       sql.query(
