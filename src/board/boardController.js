@@ -6,14 +6,12 @@ exports.insert = (req, res) => {
 
   //json으로 가져온 값 user객체에 넣기
   const board = new Board({
-    // boardId: result.boardId,
     Category: result.Category,
     HeadCount: result.HeadCount,
     Title: result.Title,
     Content: result.Content,
     userId: result.userId,
     CurrentCount: result.CurrentCount,
-    // post_date: result.post_date,
   });
 
   Board.insert(board, (err, data) => {
@@ -50,20 +48,27 @@ exports.update = (req, res) => {
 //인원수 체크
 exports.updateCount = (req, res) => {
   const CurrentCount = req.body.CurrentCount;
+  const CountUser = req.body.CountUser;
 
-  Board.updateCount(CurrentCount, req.params.boardId, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: "게시글을 찾을 수 없습니다" + req.params.boardId,
-        });
-      } else {
-        res.status(200).send({
-          message: "업데이트가 완료되었습니다" + req.params.boardId,
-        });
-      }
-    } else res.send(data);
-  });
+  Board.updateCount(
+    CurrentCount,
+    CountUser,
+    req.params.boardId,
+
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: "게시글을 찾을 수 없습니다" + req.params.boardId,
+          });
+        } else {
+          res.status(200).send({
+            message: "업데이트가 완료되었습니다" + req.params.boardId,
+          });
+        }
+      } else res.send(data);
+    }
+  );
 };
 
 // 게시글 목록 조회

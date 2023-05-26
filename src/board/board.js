@@ -19,6 +19,7 @@ const Board = function (board) {
     (this.Content = board.Content),
     (this.userId = board.userId),
     (this.CurrentCount = board.CurrentCount);
+  this.CountUser = board.CountUser;
 };
 
 // 게시글 목록 조회(get)
@@ -110,24 +111,75 @@ Board.updateById = (boardId, Board, result) => {
 };
 
 //인원수 추가
-Board.updateCount = (CurrentCount, boardId, result) => {
+Board.updateCount = (CurrentCount, CountUser, boardId, result) => {
+  // sql.query(
+  //   "Update board SET CurrentCount = ? WHERE boardId = ?",
+  //   [CurrentCount + 1, CountUser, boardId],
+  //   (err, res) => {
+  //     if (err) {
+  //       console.log("error : ", err);
+  //       result(null, err);
+  //       return;
+  //     }
+
+  //     if (res.affectedRows == 0) {
+  //       result({ kind: "not_found" }, null);
+  //       return;
+  //     }
+
+  //     console.log("updated board: ", { boardId: boardId, ...Board });
+  //     result(null, { boardId: boardId, ...Board });
+  //   }
+  // );
   sql.query(
-    "Update board SET CurrentCount = ? WHERE boardId = ?",
-    [CurrentCount + 1, boardId],
+    "SELECT CountUser FROM board WHERE boardId = ?",
+    [boardId],
     (err, res) => {
       if (err) {
-        console.log("error : ", err);
-        result(null, err);
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length === 0) {
+        console.log("Board not found");
+        result({ kind: "noe_found" }, null);
         return;
       }
 
-      if (res.affectedRows == 0) {
-        result({ kind: "not_found" }, null);
-        return;
+      const countUser = res[0].CountUser;
+      let updatedCountUser;
+
+      if (!countUser) {
+        updatedCountUser = [countUser];
+      } else {
+        const countUserArray = countUser.split(",");
+        if (countUserArray.includes(userId)) {
+          console.log("User already exists in CountUser");
+          result(null, { boardId: boardId });
+          return;
+        }
+        updatedCountUser = [...countUserArray, userId];
       }
 
-      console.log("updated board: ", { boardId: boardId, ...Board });
-      result(null, { boardId: boardId, ...Board });
+      sql.query(
+        "UPDATE board SET CountUser = ? WHERE boardId = ?",
+        [updatedCountUser.join(","), boardId],
+        (err, res) => {
+          if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+          if (res.affectedRows === 0) {
+            console.log("Board not found");
+            result({ kind: "not_found" }, null);
+            return;
+          }
+
+          console.log("Updated CountUser for boardId: ", boardId);
+          result(null, { boardId: boardId });
+        }
+      );
     }
   );
 };
