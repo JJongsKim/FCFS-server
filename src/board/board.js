@@ -113,54 +113,22 @@ Board.updateById = (boardId, Board, result) => {
 //인원수 추가
 Board.updateCount = (CurrentCount, CountUser, boardId, result) => {
   sql.query(
-    "SELECT CountUser FROM board WHERE boardId = ?",
-    [boardId],
+    "UPDATE board SET CurrentCount = ?, CountUser = CONCAT(CountUser, ', ', ?) WHERE boardId = ?",
+    [CurrentCount + 1, CountUser, boardId],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
         return;
       }
-      if (res.length === 0) {
+      if (res.affectedRows === 0) {
         console.log("Board not found");
-        result({ kind: "noe_found" }, null);
+        result({ kind: "not_found" }, null);
         return;
       }
 
-      const countUser = res[0].CountUser;
-      let updatedCountUser;
-
-      if (!countUser) {
-        updatedCountUser = [CountUser];
-      } else {
-        const countUserArray = countUser.split(",");
-        if (countUserArray.includes(CountUser)) {
-          console.log("User already exists in CountUser");
-          result(null, { boardId: boardId });
-          return;
-        }
-        updatedCountUser = [...countUserArray, CountUser];
-      }
-
-      sql.query(
-        "UPDATE board SET CurrentCount = ?, CountUser = ? WHERE boardId = ?",
-        [CurrentCount + 1, updatedCountUser.join(","), boardId],
-        (err, res) => {
-          if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-          }
-          if (res.affectedRows === 0) {
-            console.log("Board not found");
-            result({ kind: "not_found" }, null);
-            return;
-          }
-
-          console.log("Updated CountUser for boardId: ", boardId);
-          result(null, { boardId: boardId });
-        }
-      );
+      console.log("Updated CountUser for boardId: ", boardId);
+      result(null, { boardId: boardId });
     }
   );
 };
