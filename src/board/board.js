@@ -26,7 +26,7 @@ const Board = function (board) {
 // 카테고리, 제목, 내용, 현재인원, 모집인원, 게시글 순서(id), 유저확인(userId
 Board.getAll = (result) => {
   sql.query(
-    "SELECT Category, Title, Content, CurrentCount, HeadCount, boardId, userId from board",
+    "SELECT Category, Title, Content, CurrentCount, HeadCount, boardId, userId, CountUser from board",
     (err, res) => {
       if (err) {
         console.log("error : ", err);
